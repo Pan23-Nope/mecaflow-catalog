@@ -9,8 +9,8 @@ let customers = JSON.parse(localStorage.getItem('meca_customers')) || [
 ];
 
 let products = JSON.parse(localStorage.getItem('meca_products')) || [
-    { id: 1, product_code: 'SHAFT-001', name: 'Trục Truyền Động', material: 'S45C', customer_id: '1', image_url: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=400' },
-    { id: 2, product_code: 'GEAR-X25', name: 'Bánh Răng Côn', material: '40Cr', customer_id: '2', image_url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=400' }
+    { id: 1, product_code: 'SHAFT-001', name: 'Trục Truyền Động', material: 'S45C', customer_id: '1', stages: ['Phay CNC', 'Nhiệt luyện', 'Mài', 'Kiểm tra QC'], image_url: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=400' },
+    { id: 2, product_code: 'GEAR-X25', name: 'Bánh Răng Côn', material: '40Cr', customer_id: '2', stages: ['Tiện', 'Phay răng', 'Kiểm tra QC'], image_url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=400' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -173,6 +173,7 @@ async function handleProductSubmit(e) {
         name: document.getElementById('prod-name').value,
         material: document.getElementById('prod-material').value,
         customer_id: document.getElementById('prod-customer').value,
+        stages: document.getElementById('prod-stages').value.split(',').map(s => s.trim()).filter(s => s !== ''),
         image_url: previewImg.src || 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=400'
     };
 
@@ -224,6 +225,7 @@ window.editProduct = (id) => {
     document.getElementById('prod-name').value = p.name;
     document.getElementById('prod-material').value = p.material;
     document.getElementById('prod-customer').value = p.customer_id;
+    document.getElementById('prod-stages').value = p.stages ? p.stages.join(', ') : '';
 
     const previewImg = document.getElementById('preview-img');
     const uploadPlaceholder = document.getElementById('upload-placeholder');

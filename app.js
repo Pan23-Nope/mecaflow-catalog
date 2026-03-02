@@ -8,6 +8,7 @@ const mockProducts = [
         product_code: 'SHAFT-001',
         name: 'Trục Truyền Động S45C',
         material: 'Thép S45C',
+        stages: ['Phay CNC', 'Nhiệt luyện', 'Mài', 'Kiểm tra QC'],
         image_url: 'https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=400',
         customer: { name: 'Samsung Vina', code: 'SAM-01' }
     },
@@ -16,6 +17,7 @@ const mockProducts = [
         product_code: 'GEAR-X25',
         name: 'Bánh Răng Côn 25 Răng',
         material: 'Thép Hợp Kim 40Cr',
+        stages: ['Tiện', 'Phay răng', 'Kiểm tra QC'],
         image_url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=400',
         customer: { name: 'Honda Vietnam', code: 'HON-05' }
     },
@@ -126,10 +128,12 @@ window.showProductDetails = (id) => {
     document.getElementById('detail-material').innerText = p.material;
     document.getElementById('detail-customer-pill').innerText = p.customer.name;
 
-    // Optional: Populate stages if they exist in data, or use default premium ones
+    // Correctly populate stages based on data
     const stagesContainer = document.querySelector('#details-modal .flex-wrap');
     if (p.stages && p.stages.length > 0) {
         stagesContainer.innerHTML = p.stages.map(s => `<span class="stage-pill">${s}</span>`).join('');
+    } else {
+        stagesContainer.innerHTML = '<span class="text-slate-500 italic text-xs">Chưa có thông tin công đoạn</span>';
     }
 
     const modal = document.getElementById('details-modal');
