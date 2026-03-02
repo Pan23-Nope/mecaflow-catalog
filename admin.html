@@ -12,192 +12,301 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
+            background-color: #060b18;
             color: #f8fafc;
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .accent-gradient {
             background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
         }
+
+        .nav-active {
+            background: rgba(59, 130, 246, 0.1);
+            border-right: 4px solid #3b82f6;
+            color: #3b82f6 !important;
+        }
+
+        .tab-content {
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
-<body class="min-h-screen bg-[#0f172a]">
-    <!-- Shared Navbar -->
-    <nav class="sticky top-0 z-50 glass-card px-6 py-4 flex justify-between items-center bg-slate-900/80">
-        <a href="index.html" class="flex items-center gap-2 group">
-            <div
-                class="w-10 h-10 accent-gradient rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/20 transition-transform group-hover:scale-110">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-            </div>
-            <span class="text-xl font-bold tracking-tight text-white uppercase heading-font">MecaFlow</span>
-        </a>
-        <div class="hidden md:flex gap-8 text-sm font-medium">
-            <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Trang Chủ</a>
-            <a href="admin.html" class="text-blue-400 border-b-2 border-blue-500 pb-1 flex items-center gap-1">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Admin
-            </a>
-        </div>
-        <button class="md:hidden text-slate-400">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-        </button>
-    </nav>
-
-    <div class="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center p-6">
+<body class="min-h-screen bg-[#060b18] text-slate-200">
+    <div id="login-screen" class="min-h-screen flex items-center justify-center p-6 pb-20">
         <!-- Login Modal -->
-        <div id="login-modal" class="glass-card w-full max-w-md p-8 rounded-2xl shadow-2xl">
-            <div class="text-center mb-8">
-                <div class="inline-block p-4 accent-gradient rounded-full mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24"
+        <div id="login-modal"
+            class="glass-card w-full max-w-md p-10 rounded-3xl shadow-2xl border-white/5 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 accent-gradient"></div>
+            <div class="text-center mb-10">
+                <div class="inline-flex p-5 rounded-2xl bg-blue-500/10 text-blue-400 mb-6 border border-blue-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
                 </div>
-                <h1 class="text-2xl font-bold font-['Outfit']">Admin Portal</h1>
-                <p class="text-slate-400 text-sm mt-2">Truy cập hệ thống quản trị sản phẩm</p>
+                <h1 class="text-3xl font-bold font-['Outfit'] text-white">MecaFlow Admin</h1>
+                <p class="text-slate-400 mt-2">Đăng nhập để quản lý hệ thống</p>
             </div>
             <form id="login-form" class="space-y-6">
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-2">Tên đăng nhập</label>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-slate-400 ml-1">Tên đăng nhập</label>
                     <input type="text" id="username" required
-                        class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                        class="w-full px-5 py-4 rounded-xl bg-slate-900/50 border border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-white">
                 </div>
-                <div>
-                    <label class="block text-sm font-medium text-slate-300 mb-2">Mật khẩu</label>
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-slate-400 ml-1">Mật khẩu</label>
                     <input type="password" id="password" required
-                        class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500 transition-colors">
+                        class="w-full px-5 py-4 rounded-xl bg-slate-900/50 border border-slate-700 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-white">
                 </div>
                 <button type="submit"
-                    class="w-full py-3 accent-gradient text-white font-bold rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                    Đăng Nhập
+                    class="w-full py-4 accent-gradient text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    Vào Dashboard
                 </button>
-                <p id="login-error" class="hidden text-red-400 text-sm text-center">Sai thông tin đăng nhập!</p>
+                <div id="login-error"
+                    class="hidden flex items-center gap-2 justify-center text-red-400 text-sm bg-red-400/10 py-3 rounded-lg border border-red-400/20 mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Thông tin không chính xác
+                </div>
             </form>
         </div>
+    </div>
 
-        <!-- Dashboard (Hidden initially) -->
-        <div id="dashboard" class="hidden w-full max-w-7xl">
-            <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-12">
-                <div>
-                    <h1 class="text-3xl font-bold font-['Outfit']">Quản Lý Sản Phẩm</h1>
-                    <p class="text-slate-400">Thêm, sửa, xóa linh kiện và khách hàng</p>
+    <!-- Main Dashboard Layout -->
+    <div id="dashboard" class="hidden flex min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-72 bg-slate-900/50 border-r border-white/5 p-8 flex flex-col glass-card sticky top-0 h-screen">
+            <div class="flex items-center gap-3 mb-12">
+                <div
+                    class="w-10 h-10 accent-gradient rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
                 </div>
-                <div class="flex gap-4">
-                    <button id="add-product-btn"
-                        class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                        + Thêm Sản Phẩm
-                    </button>
-                    <button id="logout-btn"
-                        class="px-6 py-2 glass-card text-slate-400 font-medium rounded-lg hover:text-white transition-colors">
-                        Đăng Xuất
-                    </button>
-                </div>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Form Section -->
-                <div class="lg:col-span-1 glass-card p-6 rounded-xl h-fit sticky top-6">
-                    <h2 class="text-xl font-bold mb-6 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                        </svg>
-                        Thông Tin Sản Phẩm
-                    </h2>
-                    <form id="product-form" class="space-y-4">
-                        <input type="hidden" id="item-id">
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Mã Sản
-                                Phẩm</label>
-                            <input type="text" id="prod-code" required
-                                class="w-full px-3 py-2 rounded bg-slate-800 border border-slate-700 text-white text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Tên Sản
-                                Phẩm</label>
-                            <input type="text" id="prod-name" required
-                                class="w-full px-3 py-2 rounded bg-slate-800 border border-slate-700 text-white text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Vật
-                                Liệu</label>
-                            <input type="text" id="prod-material" required
-                                class="w-full px-3 py-2 rounded bg-slate-800 border border-slate-700 text-white text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Khách
-                                Hàng</label>
-                            <select id="prod-customer" required
-                                class="w-full px-3 py-2 rounded bg-slate-800 border border-slate-700 text-white text-sm">
-                                <option value="">Chọn khách hàng...</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs uppercase tracking-wider text-slate-500 font-bold mb-1">Hình
-                                Ảnh</label>
-                            <div
-                                class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-700 border-dashed rounded-md">
-                                <div class="space-y-1 text-center font-['Outfit']">
-                                    <svg class="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none"
-                                        viewBox="0 0 48 48">
-                                        <path
-                                            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
-                                    <div class="flex text-sm text-slate-400">
-                                        <label
-                                            class="relative cursor-pointer bg-transparent rounded-md font-medium text-blue-500 hover:text-blue-400 focus-within:outline-none">
-                                            <span>Tải lên tệp</span>
-                                            <input id="prod-image-file" name="file" type="file" class="sr-only">
-                                        </label>
-                                        <p class="pl-1">hoặc kéo thả</p>
-                                    </div>
-                                    <p class="text-xs text-slate-500">PNG, JPG, GIF up to 10MB</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pt-4 flex gap-2">
-                            <button type="submit"
-                                class="flex-1 py-2 bg-blue-600 text-white text-sm font-bold rounded hover:bg-blue-700 transition">Lưu
-                                Lại</button>
-                            <button type="reset"
-                                class="px-4 py-2 glass-card text-xs font-bold rounded hover:bg-slate-700 transition">Hủy</button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- List Section -->
-                <div class="lg:col-span-2 space-y-4" id="admin-product-list">
-                    <!-- List of products will go here with edit/delete buttons -->
-                </div>
+                <span class="text-xl font-bold tracking-tight text-white uppercase font-['Outfit']">MecaFlow</span>
             </div>
-        </div>
 
-        <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-        <script src="supabase-config.js"></script>
-        <script src="admin.js"></script>
+            <nav class="flex-1 space-y-2">
+                <button onclick="switchTab('products')" id="nav-products"
+                    class="nav-active w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-slate-400 hover:bg-white/5 hover:text-white transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                    <span class="font-semibold">Sản Phẩm</span>
+                </button>
+                <button onclick="switchTab('customers')" id="nav-customers"
+                    class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-slate-400 hover:bg-white/5 hover:text-white transition-all group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <span class="font-semibold">Khách Hàng</span>
+                </button>
+            </nav>
+
+            <div class="pt-8 border-t border-white/5 space-y-4">
+                <a href="index.html"
+                    class="flex items-center gap-3 px-5 py-4 text-slate-400 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    <span class="font-medium">Xem Trang Chủ</span>
+                </a>
+                <button onclick="logout()"
+                    class="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-red-400 hover:bg-red-400/10 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span class="font-semibold">Đăng Xuất</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Dynamic Content Area -->
+        <main class="flex-1 p-12 bg-[#060b18] overflow-y-auto h-screen">
+            <!-- Products Tab -->
+            <section id="tab-products" class="tab-content">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white font-['Outfit'] mb-2">Quản Lý Sản Phẩm</h2>
+                        <p class="text-slate-400">Danh mục linh kiện gia công chi tiết</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                    <!-- Product Form -->
+                    <div class="lg:col-span-4">
+                        <div class="glass-card p-8 rounded-3xl sticky top-8 border-white/5">
+                            <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-3">
+                                <div class="w-2 h-8 accent-gradient rounded-full"></div>
+                                <span id="product-form-title">Thêm Sản Phẩm Mới</span>
+                            </h3>
+                            <form id="product-form" class="space-y-6">
+                                <input type="hidden" id="item-id">
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Mã
+                                        Sản Phẩm</label>
+                                    <input type="text" id="prod-code" required placeholder="Ví dụ: SHAFT-001"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none focus:border-blue-500 transition-all text-white placeholder:text-slate-600">
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Tên
+                                        Linh Kiện</label>
+                                    <input type="text" id="prod-name" required placeholder="Tên đầy đủ của linh kiện"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none focus:border-blue-500 transition-all text-white placeholder:text-slate-600">
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Vật
+                                        Liệu</label>
+                                    <input type="text" id="prod-material" required placeholder="Ví dụ: Thép S45C"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none focus:border-blue-500 transition-all text-white placeholder:text-slate-600">
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Khách
+                                        Hàng</label>
+                                    <select id="prod-customer" required
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none focus:border-blue-500 transition-all text-white appearance-none cursor-pointer">
+                                        <option value="">Chọn khách hàng...</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Hình
+                                        Ảnh</label>
+                                    <div class="relative group">
+                                        <div id="image-upload-zone"
+                                            class="w-full h-40 rounded-2xl bg-slate-800/30 border-2 border-dashed border-slate-700/50 flex flex-col items-center justify-center text-slate-500 transition-all hover:bg-slate-800/50 cursor-pointer overflow-hidden">
+                                            <div id="upload-placeholder" class="flex flex-col items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="h-10 w-10 mb-2 opacity-50" fill="none" viewBox="0 0 24 24"
+                                                    stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="1.5"
+                                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                <span class="text-xs font-semibold">Tải ảnh lên hoặc kéo thả</span>
+                                            </div>
+                                            <img id="preview-img"
+                                                class="hidden absolute inset-0 w-full h-full object-cover rounded-2xl">
+                                        </div>
+                                        <input type="file" id="prod-image-file"
+                                            class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="pt-6 flex gap-3">
+                                    <button type="submit"
+                                        class="flex-1 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-all">Lưu
+                                        Sản Phẩm</button>
+                                    <button type="button" onclick="resetForm()"
+                                        class="px-6 py-4 bg-slate-800 text-slate-400 font-bold rounded-xl hover:bg-slate-700 transition-all">Hủy</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Product List -->
+                    <div class="lg:col-span-8 flex flex-col gap-4" id="admin-product-list">
+                        <!-- Products will be rendered here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Customers Tab -->
+            <section id="tab-customers" class="tab-content hidden">
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12">
+                    <div>
+                        <h2 class="text-4xl font-bold text-white font-['Outfit'] mb-2">Đối Tác Khách Hàng</h2>
+                        <p class="text-slate-400">Quản lý danh sách khách hàng và mã định danh</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                    <!-- Customer Form -->
+                    <div class="lg:col-span-4">
+                        <div class="glass-card p-8 rounded-3xl sticky top-8 border-white/5">
+                            <h3 class="text-xl font-bold text-white mb-8 flex items-center gap-3">
+                                <div class="w-2 h-8 accent-gradient rounded-full"></div>
+                                <span id="customer-form-title">Thêm Khách Hàng</span>
+                            </h3>
+                            <form id="customer-form" class="space-y-6">
+                                <input type="hidden" id="cust-id">
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Tên
+                                        Khách Hàng</label>
+                                    <input type="text" id="cust-name" required placeholder="Ví dụ: Samsung Vina"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none focus:border-blue-500 transition-all text-white placeholder:text-slate-600">
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-1 ml-1">Mã
+                                        Định Danh (Code)</label>
+                                    <input type="text" id="cust-code" required placeholder="Ví dụ: SAM-01"
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 focus:outline-none focus:border-blue-500 transition-all text-white placeholder:text-slate-600">
+                                </div>
+                                <div class="pt-6 flex gap-3">
+                                    <button type="submit"
+                                        class="flex-1 py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-all">Lưu
+                                        Đối Tác</button>
+                                    <button type="reset"
+                                        class="px-6 py-4 bg-slate-800 text-slate-400 font-bold rounded-xl hover:bg-slate-700 transition-all">Hủy</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Customer List -->
+                    <div class="lg:col-span-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="admin-customer-list">
+                            <!-- Customers will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="admin.js"></script>
 </body>
 
 </html>
