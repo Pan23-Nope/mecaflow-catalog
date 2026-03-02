@@ -3,21 +3,21 @@
 # Default message with timestamp
 MESSAGE=${1:-"Auto-deploy: $(date '+%Y-%m-%d %H:%M:%S')"}
 
-echo "🚀 Starting deployment..."
+echo "[*] Starting deployment..."
 
 # Check for changes
 if [ -z "$(git status --porcelain)" ]; then
-    echo "✅ No changes to deploy."
+    echo "[OK] No changes to deploy."
     exit 0
 fi
 
-echo "📦 Staging changes..."
+echo "[BOX] Staging changes..."
 git add .
 
-echo "💾 Committing changes with message: '$MESSAGE'..."
+echo "[DISK] Committing changes with message: '$MESSAGE'..."
 git commit -m "$MESSAGE"
 
-echo "📤 Pushing to GitHub..."
+echo "[UP] Pushing to GitHub..."
 git push origin main
 
-echo "✨ Deployment complete! GitHub Pages will update shortly."
+echo "[DONE] Deployment complete! GitHub Pages will update shortly."
